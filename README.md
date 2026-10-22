@@ -12,7 +12,9 @@ Pachet inițial de specificații și configurare • 22 octombrie 2026 • versi
 
 Aplicație desktop pentru a transforma o idee de joc Roblox într-un proiect local verificabil: cercetare, plan aprobat, cod Luau, scene, testare și raport. Gândită pentru autor și câțiva prieteni, cu date locale, Obsidian și Ollama ca bază.
 
-**Starea livrării:** documentație și exemple, nu aplicație funcțională și nu installer. Nu au fost instalate dependențe, consumate credite de generare, create repository-uri online sau modificate jocuri Roblox. Fișierele JSON sunt exemple pentru viitorul runtime propriu; nu sunt configurații Claude Code executabile.
+**Starea livrării:** etapa 1 implementată: nucleul Rust (`crates/core`) cu validare strictă și policy engine, plus ecranul „Spațiu de lucru” în React/Tauri cu **date demonstrative** (`apps/desktop`). Vezi [raportul etapei 1](docs/reports/etapa-01.md). Nu există încă worker, persistență, integrări reale sau installer testat.
+
+**Starea inițială a pachetului (0.1):** documentație și exemple, nu aplicație funcțională și nu installer. Nu au fost instalate dependențe, consumate credite de generare, create repository-uri online sau modificate jocuri Roblox. Fișierele JSON sunt exemple pentru viitorul runtime propriu; nu sunt configurații Claude Code executabile.
 
 ## Începe aici
 

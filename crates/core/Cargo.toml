@@ -1,0 +1,20 @@
+[package]
+name = "rab-core"
+description = "Contracte, validare, policy engine și mașina de stări pentru Roblox AI Builder"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+schemars.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true

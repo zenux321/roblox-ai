@@ -1,0 +1,19 @@
+[package]
+name = "rab-desktop"
+description = "Shell desktop Tauri pentru Roblox AI Builder"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[build-dependencies]
+tauri-build = { version = "=2.7.4", features = [] }
+
+[dependencies]
+tauri = { version = "=2.12.5", features = [] }
+serde.workspace = true
+serde_json.workspace = true
+rab-core = { path = "../../../crates/core" }
+
+[lints]
+workspace = true

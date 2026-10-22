@@ -1,0 +1,12 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Permisiuni minime: controalele ferestrei cu bară de titlu proprie. Fără fs, shell, http sau plugin-uri.",
+  "windows": ["main"],
+  "permissions": [
+    "core:window:allow-minimize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-close",
+    "core:window:allow-start-dragging"
+  ]
+}

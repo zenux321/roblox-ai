@@ -1,0 +1,269 @@
+.wrap {
+  max-width: var(--chat-max-w);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.banner {
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.bannerTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--warning);
+}
+
+.bannerText {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+.box {
+  background: var(--surface);
+  border: 1px solid var(--border-ring);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+}
+
+.box:focus-within {
+  border-color: var(--border-strong);
+}
+
+.input {
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-size: 15px;
+  line-height: 1.55;
+  padding: 14px 16px 6px;
+  resize: none;
+}
+
+.input:focus-visible {
+  outline: none;
+}
+
+.input:disabled {
+  cursor: not-allowed;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 10px;
+}
+
+.tool {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-ring);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.tool:hover:not(:disabled) {
+  background: var(--surface-raised);
+}
+
+.tool:disabled {
+  color: var(--text-muted);
+}
+
+.caret {
+  color: var(--text-faint);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.dotOk {
+  background: var(--success);
+}
+
+.dotDanger {
+  background: var(--danger);
+}
+
+.popWrap {
+  position: relative;
+}
+
+.popover {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  z-index: 15;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: var(--shadow-popover);
+}
+
+.modelPopover {
+  width: 360px;
+}
+
+.option {
+  padding: 10px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background: transparent;
+  text-align: left;
+}
+
+button.option:hover {
+  background: var(--surface-raised);
+}
+
+.optionActive {
+  background: var(--surface-raised);
+}
+
+.optionTitle {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.optionSub {
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.optionSubOk {
+  font-size: 12px;
+  color: var(--success);
+}
+
+.warn {
+  margin: 4px;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+  font-size: 12px;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+.contextPopover {
+  width: 380px;
+  padding: 12px;
+  gap: 10px;
+}
+
+.contextTitle {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.check input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--accent);
+  flex: none;
+}
+
+.checkText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 13px;
+}
+
+.checkGroup {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.contextNote {
+  font-size: 12px;
+  color: var(--text-faint);
+  line-height: 1.5;
+  border-top: 1px solid var(--border-card);
+  padding-top: 10px;
+}
+
+.flex {
+  flex: 1;
+}
+
+.send {
+  height: 34px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--border-card);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sendReady {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.sendReady:hover {
+  background: var(--accent-hover);
+}
+
+.stop {
+  height: 34px;
+  padding: 0 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--danger-border);
+  background: transparent;
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hint {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-faint);
+  padding: 0 4px;
+}

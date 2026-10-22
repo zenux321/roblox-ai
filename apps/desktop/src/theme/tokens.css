@@ -1,0 +1,87 @@
+/* Design tokens din docs/DESIGN_HANDOFF.md și prototipul v5. Tema este numai întunecată. */
+:root {
+  color-scheme: dark;
+
+  /* Fundaluri */
+  --bg-app: #0e1012;
+  --bg-deep: #0b0d0f;
+  --bg-panel: #121518;
+  --surface: #15181c;
+  --surface-raised: #1b1f24;
+  --surface-metric: #181b1f;
+  --surface-hover: #262b31;
+
+  /* Borduri */
+  --border-divider: #1f2328;
+  --border-subtle: #23282d;
+  --border-card: #262b31;
+  --border-ring: #2c3238;
+  --border-strong: #3a4148;
+
+  /* Text */
+  --text: #e8eaed;
+  --text-2: #dfe3e7;
+  --text-3: #c3c9cf;
+  --text-code: #cdd3d9;
+  --text-muted: #a3abb4;
+  --text-faint: #8b939c;
+  --text-disabled: #5c636b;
+
+  /* Accent verde-lime ales de utilizator */
+  --accent: #b6f36b;
+  --accent-hover: #c8ff85;
+  --on-accent: #0e1012;
+  --accent-selected-bg: #161a12;
+  --accent-soft-bg: #1f2a14;
+
+  /* Stări */
+  --success: #5ee08a;
+  --success-bg: #122018;
+  --success-border: #1f4a2f;
+  --warning: #f5b94a;
+  --warning-bg: #241f12;
+  --warning-border: #57471d;
+  --on-warning: #1a1206;
+  --danger: #f87171;
+  --danger-bg: #241515;
+  --danger-border: #6b2a2a;
+  --danger-text: #f3c1c1;
+  --close-hover: #c42b1c;
+
+  /* Persoane */
+  --self-fg: #7dd3fc;
+  --self-bg: #1b2a33;
+  --peer-fg: #c4a7ff;
+  --peer-bg: #251f33;
+  --peer-border: #3d3352;
+
+  /* Tipografie */
+  --font-ui: 'Onest', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Rază */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  --radius-modal: 16px;
+  --radius-pill: 999px;
+
+  /* Umbre */
+  --shadow-popover: 0 20px 50px rgba(0, 0, 0, 0.5);
+  --shadow-modal: 0 30px 80px rgba(0, 0, 0, 0.6);
+
+  /* Dimensiuni shell (v5) */
+  --titlebar-h: 44px;
+  --sidebar-w: 280px;
+  --sidebar-collapsed-w: 64px;
+  --panel-w: 380px;
+  --chat-max-w: 820px;
+}
+
+@media (max-width: 1439px) {
+  :root {
+    --panel-w: 340px;
+  }
+}

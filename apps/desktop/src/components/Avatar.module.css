@@ -1,0 +1,84 @@
+.person,
+.ai {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  position: relative;
+}
+
+.person {
+  border-radius: 50%;
+}
+
+.self {
+  background: var(--self-bg);
+  color: var(--self-fg);
+}
+
+.peer {
+  background: var(--peer-bg);
+  color: var(--peer-fg);
+}
+
+.ai {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: 8px;
+}
+
+.aiSoft {
+  background: var(--accent-soft-bg);
+  color: var(--accent);
+}
+
+.s20 {
+  width: 20px;
+  height: 20px;
+  font-size: 9px;
+}
+
+.ai.s20 {
+  border-radius: 5px;
+}
+
+.person.s20 {
+  font-size: 10px;
+}
+
+.s30 {
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+}
+
+.ai.s30 {
+  font-size: 11px;
+}
+
+.s32 {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+
+.presence {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  border: 2px solid var(--surface);
+}
+
+.s20 .presence {
+  width: 7px;
+  height: 7px;
+}
+
+.online {
+  background: var(--success);
+}

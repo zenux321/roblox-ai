@@ -1,0 +1,28 @@
+[workspace]
+resolver = "3"
+members = ["crates/core", "apps/desktop/src-tauri"]
+# Shellul Tauri are nevoie de WebView2 (Windows) sau webkit2gtk (Linux); în Cloud
+# rulăm implicit doar nucleul. Pe Windows: `cargo build --workspace`.
+default-members = ["crates/core"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.90"
+publish = false
+
+[workspace.dependencies]
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+sha2 = "0.11.1"
+thiserror = "2.0.21"
+schemars = "1.2.3"
+tempfile = "3.27.0"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+dbg_macro = "deny"
+todo = "deny"
+unwrap_used = "deny"

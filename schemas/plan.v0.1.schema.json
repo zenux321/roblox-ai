@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Plan",
+  "type": "object",
+  "properties": {
+    "approval": {
+      "description": "Generată de aplicație, niciodată de model sau de mână: un document cu\nvaloare ne-nulă este respins."
+    },
+    "base_snapshot_sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "budget": {
+      "$ref": "#/$defs/PlanBudget"
+    },
+    "example_only": {
+      "type": "boolean"
+    },
+    "id": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "objective": {
+      "type": "string"
+    },
+    "plan_sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "project_root": {
+      "type": "string"
+    },
+    "provider": {
+      "$ref": "#/$defs/ProviderId"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/PlanScope"
+    },
+    "status": {
+      "$ref": "#/$defs/PlanStatus"
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PlanTask"
+      }
+    },
+    "version": {
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "example_only",
+    "id",
+    "version",
+    "status",
+    "project_id",
+    "project_root",
+    "objective",
+    "provider",
+    "model",
+    "budget",
+    "scope",
+    "tasks"
+  ],
+  "$defs": {
+    "PlanBudget": {
+      "type": "object",
+      "properties": {
+        "max_retries_per_task": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0
+        },
+        "max_usd": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "max_usd",
+        "max_retries_per_task"
+      ]
+    },
+    "PlanScope": {
+      "type": "object",
+      "properties": {
+        "allow_publish": {
+          "type": "boolean"
+        },
+        "allow_push": {
+          "type": "boolean"
+        },
+        "allow_upload": {
+          "type": "boolean"
+        },
+        "external_data": {
+          "type": "string"
+        },
+        "github_repository": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "network_destinations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "studio_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "write_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "write_paths",
+        "network_destinations",
+        "external_data",
+        "allow_publish",
+        "allow_upload",
+        "allow_push"
+      ]
+    },
+    "PlanStatus": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "awaiting_approval",
+        "approved",
+        "superseded"
+      ]
+    },
+    "PlanTask": {
+      "type": "object",
+      "properties": {
+        "acceptance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowed_tools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ToolId"
+          }
+        },
+        "deliverables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "depends_on": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "depends_on",
+        "allowed_tools",
+        "deliverables",
+        "acceptance"
+      ]
+    },
+    "ProviderId": {
+      "type": "string",
+      "enum": [
+        "ollama",
+        "anthropic_api",
+        "openai_images"
+      ]
+    },
+    "ToolId": {
+      "description": "Instrumentele cunoscute de policy engine. Un nume necunoscut este respins la parsare.",
+      "type": "string",
+      "enum": [
+        "memory.search",
+        "memory.propose_note",
+        "project.read",
+        "project.propose_patch",
+        "project.apply_validated_patch",
+        "research.fetch",
+        "tests.read_results",
+        "tests.static_luau",
+        "reports.write",
+        "git.push",
+        "github.create_pr",
+        "roblox.upload_asset",
+        "roblox.publish"
+      ]
+    }
+  }
+}

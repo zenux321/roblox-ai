@@ -1,0 +1,370 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CollaborationConfig",
+  "type": "object",
+  "properties": {
+    "attachments": {
+      "$ref": "#/$defs/AttachmentsSection"
+    },
+    "blender_mcp": {
+      "$ref": "#/$defs/BlenderMcpSection"
+    },
+    "chat": {
+      "$ref": "#/$defs/ChatSection"
+    },
+    "collaboration": {
+      "$ref": "#/$defs/CollaborationSection"
+    },
+    "device_worker": {
+      "$ref": "#/$defs/DeviceWorkerSection"
+    },
+    "example_only": {
+      "type": "boolean"
+    },
+    "schema_version": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "example_only",
+    "collaboration",
+    "device_worker",
+    "chat",
+    "attachments",
+    "blender_mcp"
+  ],
+  "$defs": {
+    "AttachmentsSection": {
+      "type": "object",
+      "properties": {
+        "chunk_bytes": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0
+        },
+        "execute_attachments": {
+          "type": "boolean"
+        },
+        "max_file_bytes": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0
+        },
+        "max_shared_project_bytes": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0
+        },
+        "min_free_disk_bytes": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0
+        },
+        "resume_transfers": {
+          "type": "boolean"
+        },
+        "verify_content_hash": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "max_file_bytes",
+        "max_shared_project_bytes",
+        "min_free_disk_bytes",
+        "chunk_bytes",
+        "resume_transfers",
+        "verify_content_hash",
+        "execute_attachments"
+      ]
+    },
+    "BlenderMcpSection": {
+      "type": "object",
+      "properties": {
+        "allow_arbitrary_python": {
+          "type": "boolean"
+        },
+        "device_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "instance_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pinned_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "require_adapter_security_review": {
+          "type": "boolean"
+        },
+        "require_export_validation": {
+          "type": "boolean"
+        },
+        "require_scene_copy": {
+          "type": "boolean"
+        },
+        "server_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transport": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "require_adapter_security_review",
+        "allow_arbitrary_python",
+        "require_scene_copy",
+        "require_export_validation"
+      ]
+    },
+    "ChatSection": {
+      "type": "object",
+      "properties": {
+        "default_visibility": {
+          "$ref": "#/$defs/Visibility"
+        },
+        "general_conversations": {
+          "type": "boolean"
+        },
+        "project_conversations": {
+          "type": "boolean"
+        },
+        "require_explicit_share": {
+          "type": "boolean"
+        },
+        "sanitize_markdown": {
+          "type": "boolean"
+        },
+        "unsupported_analysis_action": {
+          "$ref": "#/$defs/UnsupportedAnalysisAction"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "default_visibility",
+        "general_conversations",
+        "project_conversations",
+        "require_explicit_share",
+        "sanitize_markdown",
+        "unsupported_analysis_action"
+      ]
+    },
+    "CollaborationMode": {
+      "type": "string",
+      "enum": [
+        "solo",
+        "host",
+        "participant"
+      ]
+    },
+    "CollaborationSection": {
+      "type": "object",
+      "properties": {
+        "allow_wildcard_bind": {
+          "type": "boolean"
+        },
+        "auto_host_failover": {
+          "type": "boolean"
+        },
+        "conflict_policy": {
+          "$ref": "#/$defs/ConflictPolicy"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "host_bind_ip": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "host_port": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0
+        },
+        "mode": {
+          "$ref": "#/$defs/CollaborationMode"
+        },
+        "offline_mutations": {
+          "$ref": "#/$defs/OfflineMutations"
+        },
+        "pairing_code_ttl_seconds": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0
+        },
+        "pairing_max_attempts": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0
+        },
+        "require_host_acceptance": {
+          "type": "boolean"
+        },
+        "require_host_fingerprint_verification": {
+          "type": "boolean"
+        },
+        "shared_project_roots": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "shared_vault_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transport": {
+          "$ref": "#/$defs/CollaborationTransport"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "mode",
+        "transport",
+        "allow_wildcard_bind",
+        "require_host_fingerprint_verification",
+        "require_host_acceptance",
+        "pairing_code_ttl_seconds",
+        "pairing_max_attempts",
+        "shared_project_roots",
+        "shared_vault_paths",
+        "auto_host_failover",
+        "conflict_policy",
+        "offline_mutations"
+      ]
+    },
+    "CollaborationTransport": {
+      "type": "string",
+      "enum": [
+        "https_and_websocket_tls"
+      ]
+    },
+    "ConflictPolicy": {
+      "type": "string",
+      "enum": [
+        "preserve_both_require_resolution"
+      ]
+    },
+    "DeviceWorkerSection": {
+      "type": "object",
+      "properties": {
+        "accept_remote_tasks": {
+          "type": "boolean"
+        },
+        "allowed_project_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowed_tools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ToolId"
+          }
+        },
+        "expose_local_mcp_or_ollama": {
+          "type": "boolean"
+        },
+        "max_api_run_usd": {
+          "type": "number",
+          "format": "double"
+        },
+        "max_concurrent_tasks": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0
+        },
+        "require_lease_and_fencing_token": {
+          "type": "boolean"
+        },
+        "require_local_consent": {
+          "type": "boolean"
+        },
+        "require_plan_hash": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "accept_remote_tasks",
+        "allowed_project_ids",
+        "allowed_tools",
+        "max_concurrent_tasks",
+        "require_local_consent",
+        "require_plan_hash",
+        "require_lease_and_fencing_token",
+        "max_api_run_usd",
+        "expose_local_mcp_or_ollama"
+      ]
+    },
+    "OfflineMutations": {
+      "type": "string",
+      "enum": [
+        "local_proposals_only"
+      ]
+    },
+    "ToolId": {
+      "description": "Instrumentele cunoscute de policy engine. Un nume necunoscut este respins la parsare.",
+      "type": "string",
+      "enum": [
+        "memory.search",
+        "memory.propose_note",
+        "project.read",
+        "project.propose_patch",
+        "project.apply_validated_patch",
+        "research.fetch",
+        "tests.read_results",
+        "tests.static_luau",
+        "reports.write",
+        "git.push",
+        "github.create_pr",
+        "roblox.upload_asset",
+        "roblox.publish"
+      ]
+    },
+    "UnsupportedAnalysisAction": {
+      "type": "string",
+      "enum": [
+        "explain_no_paid_fallback"
+      ]
+    },
+    "Visibility": {
+      "type": "string",
+      "enum": [
+        "private",
+        "shared"
+      ]
+    }
+  }
+}

@@ -1,0 +1,86 @@
+@import '@fontsource/onest/latin-400.css';
+@import '@fontsource/onest/latin-ext-400.css';
+@import '@fontsource/onest/latin-500.css';
+@import '@fontsource/onest/latin-ext-500.css';
+@import '@fontsource/onest/latin-600.css';
+@import '@fontsource/onest/latin-ext-600.css';
+@import '@fontsource/onest/latin-700.css';
+@import '@fontsource/onest/latin-ext-700.css';
+@import '@fontsource/jetbrains-mono/latin-400.css';
+@import '@fontsource/jetbrains-mono/latin-ext-400.css';
+@import '@fontsource/jetbrains-mono/latin-500.css';
+@import '@fontsource/jetbrains-mono/latin-ext-500.css';
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  background: var(--bg-app);
+  color: var(--text);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-color: var(--border-ring) transparent;
+  scrollbar-width: thin;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-faint);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@keyframes rab-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
