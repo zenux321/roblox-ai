@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.1",
+  "example_only": true,
+  "id": "plan-demo-001",
+  "version": 1,
+  "status": "draft",
+  "project_id": "demo-obby",
+  "project_root": "<SELECT_PROJECT_DIRECTORY>",
+  "base_snapshot_sha256": null,
+  "objective": "Pregătește fișierele unui obby local de test, fără Studio sau publicare.",
+  "provider": "ollama",
+  "model": "<SELECT_INSTALLED_LOCAL_MODEL>",
+  "budget": { "max_usd": 0, "max_retries_per_task": 2 },
+  "scope": {
+    "write_paths": ["src", "default.project.json", "reports"],
+    "network_destinations": ["http://127.0.0.1:11434"],
+    "external_data": "Fragmente din proiect numai către modelul local",
+    "studio_id": null,
+    "github_repository": null,
+    "allow_publish": false,
+    "allow_upload": false,
+    "allow_push": false
+  },
+  "tasks": [
+    {
+      "id": "generate",
+      "depends_on": [],
+      "allowed_tools": ["project.read", "project.apply_validated_patch"],
+      "deliverables": ["src", "default.project.json"],
+      "acceptance": ["Structura Rojo validă", "Fără scripturi/module externe"]
+    },
+    {
+      "id": "verify",
+      "depends_on": ["generate"],
+      "allowed_tools": ["project.read", "tests.static_luau", "reports.write"],
+      "deliverables": ["reports/static-checks.md"],
+      "acceptance": ["Validări statice trecute", "Playtest Studio marcat neexecutat"]
+    }
+  ],
+  "approval": null,
+  "plan_sha256": null
+}

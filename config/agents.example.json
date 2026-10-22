@@ -1,0 +1,125 @@
+{
+  "schema_version": "0.1",
+  "example_only": true,
+  "project": {
+    "id": "demo-obby",
+    "root": "<SELECT_PROJECT_DIRECTORY>",
+    "vault_root": "<SELECT_VAULT_DIRECTORY>",
+    "vault_write_subdirectory": "RobloxAIBuilder",
+    "personal_notes_read_only": true
+  },
+  "runtime": {
+    "max_concurrent_tasks": 1,
+    "max_agent_steps_per_task": 12,
+    "max_retries": 2,
+    "task_timeout_seconds": 600,
+    "max_tool_output_bytes": 262144,
+    "background_worker": true,
+    "start_at_logon": false,
+    "ipc_transport": "windows_named_pipe"
+  },
+  "budget": {
+    "currency": "USD",
+    "max_run_usd": 0,
+    "max_month_usd": 0,
+    "reserve_before_request": true,
+    "unknown_price_action": "deny",
+    "paid_fallback": false
+  },
+  "providers": {
+    "ollama": {
+      "enabled": true,
+      "endpoint": "http://127.0.0.1:11434",
+      "model": "<SELECT_INSTALLED_LOCAL_MODEL>",
+      "allow_cloud_models": false,
+      "context_tokens": 4096,
+      "max_output_tokens": 2048
+    },
+    "anthropic_api": {
+      "enabled": false,
+      "model": null,
+      "credential_ref": "credential-manager://RobloxAIBuilder/anthropic"
+    },
+    "openai_images": {
+      "enabled": false,
+      "model": null,
+      "credential_ref": "credential-manager://RobloxAIBuilder/openai",
+      "max_images_per_run": 1,
+      "quality": "low"
+    }
+  },
+  "policy": {
+    "require_approved_plan": true,
+    "invalidate_approval_on_plan_change": true,
+    "allow_arbitrary_shell": false,
+    "allow_arbitrary_host_code": false,
+    "allow_unrestricted_luau": false,
+    "allow_paid_calls": false,
+    "allow_upload": false,
+    "allow_publish": false,
+    "allow_git_push": false,
+    "allow_github_pr": false,
+    "network_default": "deny",
+    "research_allowed_hosts": ["create.roblox.com", "rojo.space"],
+    "require_plan_for_network": true,
+    "reject_external_private_network_targets": true,
+    "secrets_in_model_context": false
+  },
+  "agents": [
+    {
+      "id": "planner",
+      "provider": "ollama",
+      "tools": ["memory.search", "project.read"],
+      "output_contract": "plan_proposal"
+    },
+    {
+      "id": "researcher",
+      "provider": "ollama",
+      "tools": ["memory.search", "research.fetch"],
+      "output_contract": "sourced_notes"
+    },
+    {
+      "id": "builder",
+      "provider": "ollama",
+      "tools": ["project.read", "project.propose_patch"],
+      "output_contract": "patch_proposal"
+    },
+    {
+      "id": "reviewer",
+      "provider": "ollama",
+      "tools": ["project.read", "tests.read_results"],
+      "output_contract": "review_report"
+    },
+    {
+      "id": "memory_curator",
+      "provider": "ollama",
+      "tools": ["memory.search", "memory.propose_note"],
+      "output_contract": "note_proposal"
+    }
+  ],
+  "integrations": {
+    "roblox_studio_mcp": {
+      "enabled": false,
+      "transport": "stdio",
+      "configuration_source": "studio_official_setup",
+      "studio_id": null,
+      "require_capability_discovery": true
+    },
+    "rojo": {
+      "enabled": false,
+      "project_file": "default.project.json",
+      "filesystem_owned_paths": ["src"],
+      "require_backup_before_first_sync": true
+    },
+    "github": {
+      "enabled": false,
+      "repository": null,
+      "auth": "git_credential_manager",
+      "private_by_default": true
+    },
+    "claude_code": {
+      "mode": "external_development_tool_only",
+      "embedded_provider_enabled": false
+    }
+  }
+}

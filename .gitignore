@@ -1,0 +1,27 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+config/agents.local.json
+*.pem
+*.key
+credentials.json
+# User data / runtime
+vault/
+runtime/
+logs/
+test-results/
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+.obsidian/workspace.json
+.obsidian/workspaces.json
+# Builds
+node_modules/
+target/
+dist/
+coverage/
+*.log
+*.rbxl
+*.rbxlx
