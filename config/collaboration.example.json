@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2",
+  "example_only": true,
+  "collaboration": {
+    "enabled": false,
+    "mode": "solo",
+    "transport": "https_and_websocket_tls",
+    "host_bind_ip": null,
+    "host_port": null,
+    "allow_wildcard_bind": false,
+    "require_host_fingerprint_verification": true,
+    "require_host_acceptance": true,
+    "pairing_code_ttl_seconds": 300,
+    "pairing_max_attempts": 5,
+    "shared_project_roots": [],
+    "shared_vault_paths": [],
+    "auto_host_failover": false,
+    "conflict_policy": "preserve_both_require_resolution",
+    "offline_mutations": "local_proposals_only"
+  },
+  "device_worker": {
+    "accept_remote_tasks": false,
+    "allowed_project_ids": [],
+    "allowed_tools": [],
+    "max_concurrent_tasks": 1,
+    "require_local_consent": true,
+    "require_plan_hash": true,
+    "require_lease_and_fencing_token": true,
+    "max_api_run_usd": 0,
+    "expose_local_mcp_or_ollama": false
+  },
+  "chat": {
+    "default_visibility": "private",
+    "general_conversations": true,
+    "project_conversations": true,
+    "require_explicit_share": true,
+    "sanitize_markdown": true,
+    "unsupported_analysis_action": "explain_no_paid_fallback"
+  },
+  "attachments": {
+    "max_file_bytes": 209715200,
+    "max_shared_project_bytes": 2147483648,
+    "min_free_disk_bytes": 1073741824,
+    "chunk_bytes": 4194304,
+    "resume_transfers": true,
+    "verify_content_hash": true,
+    "execute_attachments": false
+  },
+  "blender_mcp": {
+    "enabled": false,
+    "server_source": null,
+    "pinned_version": null,
+    "transport": null,
+    "device_id": null,
+    "instance_id": null,
+    "require_adapter_security_review": true,
+    "allow_arbitrary_python": false,
+    "require_scene_copy": true,
+    "require_export_validation": true
+  }
+}

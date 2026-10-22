@@ -1,5 +1,7 @@
 # Despre exemple
 
+Extensia 0.2: collaboration.example.json completează agents.example.json; nu îl înlocuiește și nu este config vendor. Loaderul viitor va valida ambele contracte și intersecția politicilor. Host/join, execuția remote și Blender sunt dezactivate implicit; activarea cere configurare și consimțământ explicit. Nu există încă loader sau schema executabilă. Limitele de fișiere sunt politici ale produsului, nu limite Radmin/Hamachi.
+
 Fișierele JSON descriu contractele propuse ale aplicației. Sunt valide sintactic, dar nu există încă un loader sau runtime care să le aplice. M0 trebuie să creeze schemele și validarea semantică.
 
 `example_only: true` și placeholder-ele împiedică folosirea lor ca configurație de producție. Wizardul generează o configurație reală cu `example_only: false`, rădăcini canonice și model local verificat. Nu înlocui cheile cu secrete: `credential_ref` este o referință logică de implementat, nu un secret sau API Windows existent.

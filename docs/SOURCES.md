@@ -1,5 +1,13 @@
 # Surse și limite de verificare
 
+## Extensia 0.2 — proveniență
+
+Cerințele din PRODUCT_UPDATE.md provin din deciziile explicite ale utilizatorului după livrarea inițială: păstrarea designului, chat/atașamente, colaborare, alegerea host/join prin VPN și Blender opțional. Contractele de rețea, cote, leases și schema sunt propuneri de implementare, nu funcții declarate ale furnizorilor.
+
+Referințe oficiale consultate în conversație: [Radmin VPN](https://www.radmin-vpn.com/) pentru rețea virtuală și [Hamachi](https://vpn.net/) pentru conectivitate și oferta gratuită curentă. Revalidează condițiile și versiunile la setup. Supabase a fost evaluat, dar nu este alegerea pentru modul curent.
+
+Nu s-a verificat sau selectat încă un server MCP Blender. Nu s-a primit exportul designului final. Acestea sunt dependențe concrete pentru etapele B1 și UI fidelă, nu motive să inventăm capabilități sau ecrane.
+
 Accesate la 22 octombrie 2026. Sunt surse de verificare a produselor externe; arhitectura și pragurile propuse sunt decizii proprii ale proiectului, nu promisiuni ale furnizorilor. Revalidează înainte de cod și release.
 
 | Sursă oficială | Ce fundamentează |

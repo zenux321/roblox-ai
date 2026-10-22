@@ -1,5 +1,11 @@
 # Arhitectură tehnică
 
+## Extensia 0.2
+
+Arhitectura de mai jos rămâne baza fiecărui PC. COLLABORATION.md adaugă un coordinator pe PC-ul gazdă, listener TLS separat pe interfața VPN selectată, identități/roluri, jurnal comun, outbox și sincronizare. Afirmația „niciun listener LAN” din secțiunea worker privește IPC-ul local; nu interzice noul listener de colaborare, care rămâne dezactivat până la activarea explicită a găzduirii. Niciun endpoint Ollama/Studio/Blender MCP nu este expus colegului.
+
+CHAT_AND_ASSETS.md definește conversații/audiențe, transferuri recuperabile și variante de imagini. BLENDER_MCP.md definește adaptorul opțional, fără alegerea anticipată a unui server vendor. PRODUCT_UPDATE.md este indexul deciziilor noi. Schemele/migrațiile din aceste documente sunt contracte propuse, încă neimplementate.
+
 ## 1. Decizii de bază
 
 Tauri 2 + React/TypeScript pentru interfață, Rust pentru motor și worker, SQLite pentru stare tranzacțională. Această alegere evită un backend găzduit și un runtime Python/Node separat pe calculatorul prietenilor. Rust adaugă complexitate de dezvoltare, acceptată pentru integrarea Windows și livrarea unor executabile. Node este necesar la build pentru frontend, nu pentru utilizatorul final. Verificarea fezabilității are loc în M0; nu se schimbă stackul fără un ADR motivat.

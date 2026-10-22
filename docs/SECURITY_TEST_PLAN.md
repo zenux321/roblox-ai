@@ -1,5 +1,22 @@
 # Plan de securitate și verificare
 
+## Teste noi pentru extensia 0.2
+
+| ID / severitate | Scenariu | Rezultat obligatoriu |
+|---|---|---|
+| S23 critic | Pairing replay, cod expirat/bruteforce, gazdă cu alt fingerprint | Refuz, rate limit, accept explicit; credential individual revocabil |
+| S24 critic | Coleg cere alt project_id, conversație privată, blob după revocare | ACL server per request; zero date scurse; sesiune revocată închisă |
+| S25 critic | Două execuții după partiție/restart; rezultat cu fencing token vechi | Niciun rezultat stale integrat; efect incert reconciliat, fără retry orb |
+| S26 high | Host down, outbox edit pe revizie veche, reconnect | Cache offline vizibil, fără aprobare fictivă; conflict păstrează ambele versiuni |
+| S27 high | Upload mare întrerupt, chunk corupt, disk full, MIME fals | Resume verificat, hash final, cleanup/rezervă controlată; nicio execuție de atașament |
+| S28 critic | Participant încearcă să activeze worker/cheie API a colegului | Consimțământ și buget local obligatorii, interdicție independentă de owner host |
+| S29 critic | Listener pe interfață greșită, migrare IP, acces la Ollama/MCP | Niciun bind wildcard implicit; listener oprit/revalidat; porturile locale inaccesibile |
+| S30 critic | .blend cu script, tool MCP cere Python arbitrar/export extern | Auto-run off, operație refuzată; Blender fără secrete; adaptor nesigur rămâne blocat |
+| S31 high | Două instanțe Studio/Blender, rezultate/scene confundate | device+instance+resource owner verificate; single-writer și snapshot |
+| S32 high | Chat pretinde analiză video text-only, retry imagine dublează costul | Stare unsupported reală; idempotency/recovery și usage corect, fără apel automat duplicat |
+
+Dovezi: două conturi/device-uri de test, rețea VPN reală și simulări deterministe de partiție. UI simulată nu validează protocolul. Exporturile de diagnostic nu includ coduri de pairing, tokenuri, chei sau note personale. R1 este blocat de orice critic/high nerezolvat în funcțiile activate.
+
 Acest fișier definește teste de implementat. Nu reprezintă un audit efectuat asupra unei aplicații existente.
 
 ## Model de amenințări

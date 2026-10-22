@@ -1,5 +1,15 @@
 # Setup, GitHub și distribuție Windows
 
+## Setup nou pentru colaborare și Blender
+
+Instalează/configurează separat Radmin VPN sau Hamachi prin sursele oficiale, numai la alegerea utilizatorului. Ambii membri intră în aceeași rețea. Aplicația nu instalează silent drivere VPN și nu cere dezactivarea firewallului. Modul solo nu depinde de VPN.
+
+Gazda alege proiectul, documentele comune și IP-ul/adaptorul VPN; afișează portul, fingerprintul și codul temporar. Colegul verifică identitatea, solicită acces, gazda acceptă. Rulează health checks pentru rutare/TLS/protocol fără a pretinde detectarea sigură a programului VPN. Un profil de firewall se limitează la app/adaptor/peer. Dezinstalarea elimină doar propriile reguli și taskuri, nu VPN-ul sau datele comune.
+
+Oprirea găzduirii închide listenerul și lease-urile; închiderea UI poate lăsa workerul pornit. Backup/restore gazdă și schimbarea dispozitivului se fac explicit, fără failover automat. Fiecare participant vede ce date sunt cache local și ce date nu s-au sincronizat.
+
+Blender este opțional. Înainte de instalarea unui MCP server/add-on, parcurge gate-ul din BLENDER_MCP.md. Exportul Claude Design trebuie adăugat sau referit înaintea implementării UI fidele; nu este inclus în pachetul inițial.
+
 ## Pentru dezvoltator acum
 
 Pachetul este pregătit pentru import într-un repository; nu conține încă un proiect compilabil. Creează un repository privat prin GitHub, copiază fișierele, verifică lista de fișiere și publică primul commit. Autorizează Claude GitHub App numai pentru acel repository dacă folosești Cloud. Nu conecta toate repository-urile implicit.

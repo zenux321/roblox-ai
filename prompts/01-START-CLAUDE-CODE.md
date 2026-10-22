@@ -1,5 +1,7 @@
 # Primul prompt pentru Claude Code Cloud sau local
 
+Actualizare: pentru cerințele noi folosește 02-CONTINUE-EXPANDED-SCOPE.md. Dacă începi cu M0 folosind textul de mai jos, citește obligatoriu și docs/PRODUCT_UPDATE.md, CHAT_AND_ASSETS.md, COLLABORATION.md și BLENDER_MCP.md înainte de plan. M0 rămâne fundația, nu întregul produs extins.
+
 Copiază textul de mai jos într-o sesiune deschisă în repository:
 
 ---

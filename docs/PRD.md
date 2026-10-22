@@ -1,5 +1,7 @@
 # Specificație de produs
 
+> Actualizare 0.2: citește PRODUCT_UPDATE.md, CHAT_AND_ASSETS.md, COLLABORATION.md și BLENDER_MCP.md. Acestea adaugă R11–R18 și au prioritate pentru noile fluxuri. Păstrează designul ales de utilizator. Chatul și colaborarea sunt funcții de implementat, nu doar ecrane demonstrative.
+
 ## 1. Scop și utilizatori
 
 Utilizatorul descrie un joc sau o modificare în română. Aplicația cercetează surse, citește memoria proiectului, propune un plan și, după aprobare, execută sarcinile, testează și livrează modificări verificabile. Public: autorul și un grup mic de prieteni, fiecare pe propriul Windows. Fără taxă proprie de utilizare; serviciile externe pot avea costuri separate.
@@ -47,7 +49,7 @@ MVP: proiect local, Ollama, plan aprobat, modificări în copie de lucru, vault,
 
 v0.2: cercetare web cu adaptoare, imagini OpenAI opționale, integrare GitHub cu permisiuni restrânse și installer pentru prieteni. Claude API este opțional, nu precondiție pentru MVP.
 
-În afara primei versiuni: hosting central, conturi partajate, server de agenți pe internet, jocuri comerciale autonome, generare garantată de mesh-uri rigged din imagini, publicare automată implicită, execuție host arbitrară, cumpărarea de asseturi și abonamente.
+În afara primei versiuni: hosting central public, conturi partajate, jocuri comerciale autonome, generare garantată de mesh-uri rigged din imagini, publicare automată implicită, execuție host arbitrară, cumpărarea de asseturi și abonamente. Colaborarea privată gazdă/participant și taskurile pe două PC-uri intră în etapele C1–C3; Blender opțional intră în B1.
 
 ## 6. Cercetare și memorie
 

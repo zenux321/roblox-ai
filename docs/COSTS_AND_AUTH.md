@@ -1,5 +1,11 @@
 # Costuri, credit Cloud și autentificare
 
+## Extensia de colaborare
+
+Modul ales folosește PC-ul gazdă și o rețea VPN/LAN, fără Supabase obligatoriu. Stocarea comună consumă discul gazdei; transferurile consumă conexiunile voastre. Nu există plafon de stocare Supabase, dar aplicația impune propriile cote ajustabile. Nu promite disponibilitate când gazda este oprită.
+
+Modelele locale rulează pe fiecare worker. Costurile API aparțin proprietarului cheii și necesită grant/buget local; ownerul proiectului nu poate aproba cheltuieli pe contul colegului. Blender local nu implică taxă API în sine, însă add-onuri/servicii de generare terțe pot avea costuri și rămân dezactivate până la verificare.
+
 Verificat la 22 octombrie 2026. Reguli comerciale și accesul efectiv se reverifică înaintea implementării și lansării. Soldurile nu au fost citite din conturile live.
 
 ## Creditul de 250 USD

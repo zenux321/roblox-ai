@@ -1,5 +1,22 @@
 # Plan etapizat pentru Claude Code Cloud și local
 
+## Extinderea scopului 0.2
+
+Etapele inițiale M0–M6 rămân fundația. Estimarea lor inițială nu include extensiile de mai jos; acestea se estimează după spike-urile de conectivitate și adaptor. Pachetul complet cerut acum include și C0–C3 și B1, cu Blender dezactivabil. Nu marca produsul complet doar după M6.
+
+| Etapă nouă | Dependență și mediu | Livrabil / gate |
+|---|---|---|
+| C0 — chat și design | M1–M2; Cloud + Windows UI | Integrează designul real furnizat, conversații/audiențe, preview, context și mock thumbnails; istoric/retry/stop și privat→comun testate |
+| C1 — host/join | M2; core Cloud, două PC-uri Windows | Pairing TLS, fingerprint, ACL, revocare, jurnal și reconnect; chat comun funcțional pe VPN, niciun port public/MCP expus |
+| C2 — fișiere și conflicte | C0+C1 | Transfers resume/hash, vault selectat, outbox offline, conflicts și Git branch workflow; transfer mare întrerupt și pierdere de membership testate |
+| C3 — workeri distribuiți | M3+C2 | Capabilities, consimțământ device, plan comun + grant local, lease/fencing, rezultate validate; crash/partition fără execuție duplicată a efectelor |
+| B1 — Blender opțional | M4, C3 pentru scenariul remote | ADR server verificat, adaptor restrâns, copie scenă, preview/export/import; gate Python/izolare și probe Windows/Studio |
+| R1 — release extins | Etapele aplicabile de mai sus | Installer upgrade, firewall per adaptor, două PC-uri, testele S23–S32 și documentație pentru host/join |
+
+API-ul real pentru thumbnails se conectează în M5, după mockul C0; teste plătite doar cu buget. C3 nu necesită API cloud. B1 poate fi livrat separat, dar interfața trebuie să arate „neconfigurat” până la validarea adaptorului. R1 trebuie să testeze proiect existent și vault real de test, nu doar obby nou.
+
+Prima sesiune după această actualizare citește promptul 02-CONTINUE-EXPANDED-SCOPE.md. Construiește fundația pe etape; cerințele noi nu autorizează cheltuieli, publicare sau instalări în afara planului aprobat.
+
 Etapele sunt backlog, nu autorizare pentru toate operațiile viitoare. Se aprobă planul concret al etapei; după aprobare, Claude Code execută sarcinile incluse fără confirmări repetitive. Estimările sunt orientative pentru un dezvoltator asistat de AI, nu conversie a creditelor în timp garantat.
 
 | Etapă | Mediu | Livrabil și criteriu de trecere | Estimare |

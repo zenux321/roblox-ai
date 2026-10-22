@@ -1,5 +1,9 @@
 # Verificarea pachetului inițial
 
+## Extensia 0.2
+
+Actualizarea adaugă specificații pentru chat/atașamente, colaborare VPN și Blender opțional, plus config și prompt nou. Validarea livrării verifică sintaxa celor trei JSON-uri, țintele linkurilor Markdown locale și implicitele restrictive ale configurației de colaborare. Nu sunt teste de runtime, networking, securitate sau Blender: acestea rămân de implementat. Inventarul de 20 de fișiere de mai jos descrie livrarea inițială, nu versiunea extinsă.
+
 Data: 22 octombrie 2026.
 
 Verificat efectiv înainte de arhivare:

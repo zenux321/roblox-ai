@@ -1,5 +1,11 @@
 # Roblox AI Builder pentru Windows
 
+## Actualizare 0.2 — cerințe noi aprobate ca direcție
+
+Citește întâi [cerințele consolidate](docs/PRODUCT_UPDATE.md), apoi [chat și asseturi](docs/CHAT_AND_ASSETS.md), [colaborarea prin VPN](docs/COLLABORATION.md) și [Blender MCP](docs/BLENDER_MCP.md). Acestea completează pachetul inițial: designul existent se păstrează; colaborarea este gazdă/participant prin Radmin/Hamachi, fără Supabase obligatoriu; workerii pot împărți sarcini independente. Nu sunt încă implementate.
+
+Exemplu de configurare nou: [colaborare, chat și Blender](config/collaboration.example.json). Pentru Claude Code folosește [promptul actualizat de continuare](prompts/02-CONTINUE-EXPANDED-SCOPE.md).
+
 Pachet inițial de specificații și configurare • 22 octombrie 2026 • versiunea 0.1-draft.
 
 Aplicație desktop pentru a transforma o idee de joc Roblox într-un proiect local verificabil: cercetare, plan aprobat, cod Luau, scene, testare și raport. Gândită pentru autor și câțiva prieteni, cu date locale, Obsidian și Ollama ca bază.

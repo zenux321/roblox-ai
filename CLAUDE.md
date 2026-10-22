@@ -1,5 +1,11 @@
 # Instrucțiuni pentru dezvoltare
 
+## Actualizare obligatorie 0.2
+
+Citește și docs/PRODUCT_UPDATE.md, docs/CHAT_AND_ASSETS.md, docs/COLLABORATION.md și docs/BLENDER_MCP.md. Acestea includ cerințele ulterioare confirmate și prevalează asupra restricțiilor de scope din pachetul 0.1. Păstrează designul Claude Design al utilizatorului; cere exportul/linkul dacă nu este în repository, fără să inventezi aspectul lui.
+
+Colaborarea aleasă este host/join prin Radmin VPN, Hamachi sau LAN, fără backend găzduit obligatoriu. VPN-ul nu implementează sincronizarea. Agenții colegului execută numai după consimțământ local; Ollama, IPC și MCP rămân locale. Nicio promisiune de VRAM combinat sau failover automat. Chatul, atașamentele, thumbnails și Blender opțional sunt cerințe țintă, nu funcții existente.
+
 Citește README, docs/PRD.md, docs/ARCHITECTURE.md, docs/ROADMAP.md și docs/SECURITY_TEST_PLAN.md înainte de implementare. Comunică în română; identificatorii codului în engleză. Documentele descriu ținta, nu funcții deja implementate.
 
 ## Mod de lucru
@@ -16,7 +22,7 @@ Citește README, docs/PRD.md, docs/ARCHITECTURE.md, docs/ROADMAP.md și docs/SEC
 - Nu inventa versiuni de SDK, modele, comenzi MCP sau API-uri. Verifică documentația oficială la implementare, fixează versiuni și păstrează lockfile-urile.
 - Configurațiile din `config/` sunt contracte propuse. Prima etapă implementează validarea strictă și respinge câmpurile necunoscute, furnizorii dezactivați și placeholder-ele folosite la execuție.
 - Rulează offline cu furnizor fals în CI. Testele reale plătite sunt dezactivate implicit.
-- Inițial un singur job/model local simultan. Nu construi un sistem distribuit sau orchestrare de agenți paraleli înainte de demonstrarea necesității.
+- Inițial un singur job/model simultan per PC. Colaborarea și taskurile independente pe două PC-uri sunt cerute explicit, dar se implementează în etapele dedicate, cu leases, consimțământ local și reconciliere.
 - Codul și scenele administrate de Rojo au o singură sursă de adevăr pe disc. Modificările Studio în aceleași zone trebuie reconciliate înainte de sincronizare.
 
 ## Limite obligatorii
