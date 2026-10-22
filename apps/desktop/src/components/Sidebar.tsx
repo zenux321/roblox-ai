@@ -2,7 +2,7 @@ import { ChevronDown, ChevronsLeft, ChevronsRight, Plus } from 'lucide-react';
 
 import { usePopover } from '../app/usePopover';
 import type { ConversationScope, ConversationSummary, ProjectInfo, RecentProject } from '../domain/types';
-import { t } from '../i18n';
+import { formatWhen, t } from '../i18n';
 import styles from './Sidebar.module.css';
 
 interface SidebarProps {
@@ -17,6 +17,10 @@ interface SidebarProps {
   onSearch: (query: string) => void;
   onOpen: (id: string) => void;
   onCreate: (scope: ConversationScope) => void;
+  planActive: boolean;
+  /** Punct de atenție pe „Plan și sarcini”. */
+  planDot: 'warning' | 'accent' | null;
+  onOpenPlan: () => void;
 }
 
 const NAV_ITEMS = ['hosting', 'plan', 'changes', 'memory', 'computers', 'models'] as const;
@@ -44,7 +48,7 @@ function ConversationRow({
           {shared ? t('sidebar.shared') : t('sidebar.private')}
         </span>
         <span>·</span>
-        <span>{conversation.lastActivity}</span>
+        <span>{formatWhen(conversation.lastActivity)}</span>
       </span>
     </button>
   );
@@ -180,12 +184,31 @@ export function Sidebar(props: SidebarProps) {
       </div>
 
       <div className={styles.nav}>
-        {NAV_ITEMS.map((key) => (
-          <button key={key} type="button" className={styles.navItem} disabled title={t('sidebar.nextStage')}>
-            <span className={styles.navLabel}>{t(`sidebar.nav.${key}`)}</span>
-            {key === 'hosting' && <span className={styles.navDot} />}
-          </button>
-        ))}
+        {NAV_ITEMS.map((key) =>
+          key === 'plan' ? (
+            <button
+              key={key}
+              type="button"
+              className={`${styles.navItem} ${props.planActive ? styles.navActive : ''}`}
+              aria-current={props.planActive ? 'page' : undefined}
+              onClick={props.onOpenPlan}
+            >
+              <span className={styles.navLabel}>{t(`sidebar.nav.${key}`)}</span>
+              {props.planDot && <span className={`${styles.navDot} ${styles[`navDot_${props.planDot}`]}`} />}
+            </button>
+          ) : (
+            <button
+              key={key}
+              type="button"
+              className={styles.navItem}
+              disabled
+              title={t('sidebar.nextStage')}
+            >
+              <span className={styles.navLabel}>{t(`sidebar.nav.${key}`)}</span>
+              {key === 'hosting' && <span className={styles.navDot} />}
+            </button>
+          ),
+        )}
       </div>
     </nav>
   );

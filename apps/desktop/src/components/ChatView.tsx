@@ -44,6 +44,7 @@ interface ChatViewProps {
   onStop: () => void;
   onRetry: (message: AssistantMessage) => void;
   onPreparePlan: () => void;
+  onOpenPlan: () => void;
   demoMenu: React.ReactNode;
 }
 
@@ -228,6 +229,7 @@ export function ChatView(props: ChatViewProps) {
                       canRetry={!props.busy && providerReady}
                       onRetry={props.onRetry}
                       onPreparePlan={props.onPreparePlan}
+                      onOpenPlan={props.onOpenPlan}
                     />
                   );
               }

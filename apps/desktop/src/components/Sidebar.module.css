@@ -354,3 +354,21 @@
   border-radius: 50%;
   background: var(--text-faint);
 }
+
+.navItem:hover:not(:disabled) {
+  background: var(--surface);
+}
+
+.navActive,
+.navActive:hover {
+  background: var(--surface-raised);
+  color: var(--text);
+}
+
+.navDot_warning {
+  background: var(--warning);
+}
+
+.navDot_accent {
+  background: var(--accent);
+}

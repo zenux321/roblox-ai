@@ -5,6 +5,10 @@
  */
 import type {
   AssistantMessage,
+  PlanView,
+  RunEventView,
+  RunResults,
+  RunView,
   ConversationScope,
   ConversationSummary,
   DemoControls,
@@ -32,9 +36,12 @@ import {
   TASKS,
   THREADS,
 } from './demoData';
+import { MockPlanEngine } from './mockPlans';
 import { demoReplyFor, plainText } from './replies';
 
 export interface MockTiming {
+  /** Pauza dintre pașii unei rulări simulate. */
+  stepMs?: number;
   loadMs: number;
   slowLoadMs: number;
   thinkingMs: number;
@@ -48,6 +55,7 @@ export const DEFAULT_TIMING: MockTiming = {
   thinkingMs: 900,
   tickMs: 40,
   charsPerTick: 5,
+  stepMs: 600,
 };
 
 export class ProviderMissingError extends Error {
@@ -100,8 +108,10 @@ export class MockWorkspaceGateway implements WorkspaceGateway, DemoControls {
   private status: StatusSnapshot;
   private slowLoading = false;
   private seq = 100;
+  private readonly plans: MockPlanEngine;
 
   constructor(private readonly timing: MockTiming = DEFAULT_TIMING) {
+    this.plans = new MockPlanEngine(timing.stepMs ?? 0);
     this.conversations = structuredClone(CONVERSATIONS);
     this.threads = new Map(Object.entries(structuredClone(THREADS)));
     this.status = {
@@ -308,8 +318,8 @@ export class MockWorkspaceGateway implements WorkspaceGateway, DemoControls {
     }
   }
 
-  async preparePlan(conversationId: string): Promise<AssistantMessage> {
-    await sleep(0);
+  async preparePlan(conversationId: string): Promise<{ message: AssistantMessage; plan: PlanView }> {
+    const plan = await this.plans.create();
     const message: AssistantMessage = {
       kind: 'assistant',
       id: this.nextId('msg'),
@@ -319,17 +329,81 @@ export class MockWorkspaceGateway implements WorkspaceGateway, DemoControls {
       extras: [
         {
           type: 'plan_card',
-          title: 'Plan v3 · Cronometru pe server',
-          summary:
-            '2 pași · Constructor pe PC-ul meu · 2 teste · cost maxim 0,00 $ · date trimise extern: niciuna',
+          title: `Plan v${plan.version} · ${plan.title}`,
+          summary: `${plan.tasks.length} pași · ${plan.tests.length} teste · cost maxim 0,00 $ · date trimise extern: niciuna`,
           approver: `${OWNER_NAME} (proprietar)`,
+          planId: plan.id,
+          planVersion: plan.version,
         },
       ],
       attempt: 1,
       stopped: false,
     };
     this.thread(conversationId).push(message);
-    return structuredClone(message);
+    return { message: structuredClone(message), plan };
+  }
+
+  async currentPlan(): Promise<PlanView | null> {
+    await sleep(0);
+    return this.plans.current();
+  }
+
+  async approvePlan(planId: string, version: number, sha256: string): Promise<PlanView> {
+    await sleep(0);
+    return this.plans.approve(planId, version, sha256);
+  }
+
+  async revokeApproval(planId: string, version: number): Promise<PlanView> {
+    await sleep(0);
+    return this.plans.revoke(planId, version);
+  }
+
+  async startRun(planId: string, version: number): Promise<RunView> {
+    await sleep(0);
+    return this.plans.start(planId, version);
+  }
+
+  async pauseRun(runId: string): Promise<RunView> {
+    await sleep(0);
+    return this.plans.pause(runId);
+  }
+
+  async resumeRun(runId: string): Promise<RunView> {
+    await sleep(0);
+    return this.plans.resume(runId);
+  }
+
+  async cancelRun(runId: string): Promise<RunView> {
+    await sleep(0);
+    return this.plans.cancel(runId);
+  }
+
+  async getRun(runId: string): Promise<RunView> {
+    await sleep(0);
+    return this.plans.get(runId);
+  }
+
+  async runEvents(runId: string, afterSeq: number): Promise<RunEventView[]> {
+    await sleep(0);
+    return this.plans.events(runId, afterSeq);
+  }
+
+  async runResults(runId: string): Promise<RunResults | null> {
+    await sleep(0);
+    return this.plans.results(runId);
+  }
+
+  async resolveRecovery(runId: string): Promise<RunView> {
+    await sleep(0);
+    return this.plans.resolveRecovery(runId);
+  }
+
+  onRunEvent(listener: (runId: string, seq: number) => void): () => void {
+    return this.plans.subscribe(listener);
+  }
+
+  simulateRestart(): string | null {
+    return this.plans.simulateRestart();
   }
 
   setProviderAvailable(available: boolean): StatusSnapshot {

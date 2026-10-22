@@ -11,7 +11,7 @@ import type {
   PersonMessage,
   Visibility,
 } from '../domain/types';
-import { formatUsd, t } from '../i18n';
+import { formatUsd, formatWhen, t } from '../i18n';
 import { AiAvatar, PersonAvatar } from './Avatar';
 import styles from './Messages.module.css';
 
@@ -108,7 +108,7 @@ export function PersonMessageView({
       <div className={styles.body}>
         <div className={styles.head}>
           <span className={`${styles.author} ${styles[palette]}`}>{author?.name ?? '?'}</span>
-          <span className={styles.time}>{message.time}</span>
+          <span className={styles.time}>{formatWhen(message.time)}</span>
         </div>
         {message.text && <div className={styles.bubble}>{message.text}</div>}
         {message.attachments.length > 0 && (
@@ -220,6 +220,7 @@ export interface AssistantViewProps {
   canRetry: boolean;
   onRetry: (message: AssistantMessage) => void;
   onPreparePlan: () => void;
+  onOpenPlan: () => void;
 }
 
 export function AssistantMessageView(props: AssistantViewProps) {
@@ -232,7 +233,7 @@ export function AssistantMessageView(props: AssistantViewProps) {
         <div className={styles.head}>
           <span className={styles.author}>{t('chat.assistant')}</span>
           <span className={styles.time}>
-            {message.model} · {message.time}
+            {message.model} · {formatWhen(message.time)}
           </span>
           {message.tag && (
             <span className={`${styles.tag} ${message.stopped ? styles.tagWarning : ''}`}>{message.tag}</span>
@@ -273,12 +274,7 @@ export function AssistantMessageView(props: AssistantViewProps) {
                   </div>
                   <span className={styles.planSummary}>{extra.summary}</span>
                   <div className={styles.planActions}>
-                    <button
-                      type="button"
-                      className={styles.buttonAccent}
-                      disabled
-                      title={t('chat.openPlanLater')}
-                    >
+                    <button type="button" className={styles.buttonAccent} onClick={props.onOpenPlan}>
                       {t('chat.openPlan')}
                     </button>
                     <span className={styles.planApprover}>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import type { WorkspaceSnapshot } from '../domain/types';
+import type { PlanView, RunView, WorkspaceSnapshot } from '../domain/types';
 import { t } from '../i18n';
 import { AiAvatar, PersonAvatar } from './Avatar';
 import styles from './RightPanel.module.css';
@@ -17,9 +17,63 @@ interface RightPanelProps {
   snapshot: WorkspaceSnapshot;
   onDiscuss: () => void;
   canDiscuss: boolean;
+  plan: PlanView | null;
+  run: RunView | null;
+  onOpenPlan: () => void;
 }
 
-export function RightPanel({ snapshot, onDiscuss, canDiscuss }: RightPanelProps) {
+function PlanStatusCard({
+  plan,
+  run,
+  onOpenPlan,
+}: {
+  plan: PlanView | null;
+  run: RunView | null;
+  onOpenPlan: () => void;
+}) {
+  const percent = run && run.total ? Math.round((run.done / run.total) * 100) : 0;
+  return (
+    <div className={styles.planCard}>
+      <div className={styles.sectionHead}>
+        <span className={styles.sectionTitle}>{t('panel.currentPlan')}</span>
+        {plan && (
+          <span className={styles.planState}>
+            {run ? t(`run.statusLabels.${run.status}`) : t(`plan.statusLabels.${plan.status}`)}
+          </span>
+        )}
+      </div>
+      {plan ? (
+        <>
+          <span className={styles.current}>
+            Plan v{plan.version} · {plan.title}
+          </span>
+          {run && (
+            <div
+              className={styles.progress}
+              role="progressbar"
+              aria-valuenow={percent}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label={t('panel.currentPlan')}
+            >
+              <span
+                className={`${styles.progressFill} ${styles.fill_accent}`}
+                style={{ width: `${percent}%` }}
+              />
+            </div>
+          )}
+          <button type="button" className={styles.buttonDark} onClick={onOpenPlan}>
+            {t('panel.openPlan')}
+          </button>
+        </>
+      ) : (
+        <span className={styles.faint}>{t('panel.noPlan')}</span>
+      )}
+    </div>
+  );
+}
+
+export function RightPanel({ snapshot, onDiscuss, canDiscuss, plan, run, onOpenPlan }: RightPanelProps) {
   const [tab, setTab] = useState<TabKey>('project');
   const { project, status } = snapshot;
 
@@ -45,6 +99,7 @@ export function RightPanel({ snapshot, onDiscuss, canDiscuss }: RightPanelProps)
       <div className={styles.content} role="tabpanel" id={`tabpanel-${tab}`} aria-labelledby={`tab-${tab}`}>
         {tab === 'project' && (
           <div className={styles.stack18}>
+            <PlanStatusCard plan={plan} run={run} onOpenPlan={onOpenPlan} />
             <div className={styles.titleBlock}>
               <span className={styles.title}>{project.name}</span>
               <span className={styles.faint}>{project.kindLabel}</span>

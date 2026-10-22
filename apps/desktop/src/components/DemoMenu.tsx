@@ -2,7 +2,7 @@ import { usePopover } from '../app/usePopover';
 import { t } from '../i18n';
 import styles from './DemoMenu.module.css';
 
-export type DemoAction = 'normal' | 'loading' | 'empty' | 'model_missing';
+export type DemoAction = 'normal' | 'loading' | 'empty' | 'model_missing' | 'restart';
 
 export function DemoMenu({
   onAction,
@@ -17,6 +17,7 @@ export function DemoMenu({
     { action: 'loading', label: t('demo.loading') },
     { action: 'empty', label: t('demo.empty') },
     { action: 'model_missing', label: providerMissing ? t('demo.modelBack') : t('demo.modelMissing') },
+    { action: 'restart', label: t('demo.restart') },
   ];
   return (
     <div className={styles.wrap} ref={menuAnchor}>

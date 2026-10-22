@@ -5,13 +5,13 @@ import { describe, expect, it } from 'vitest';
 import { MockWorkspaceGateway, type MockTiming } from '../mock/mockGateway';
 import { App } from './App';
 
-const FAST: MockTiming = { loadMs: 0, slowLoadMs: 0, thinkingMs: 5, tickMs: 2, charsPerTick: 40 };
+const FAST: MockTiming = { loadMs: 0, slowLoadMs: 0, thinkingMs: 5, tickMs: 2, charsPerTick: 40, stepMs: 2 };
 const SLOW_STREAM: MockTiming = { loadMs: 0, slowLoadMs: 0, thinkingMs: 0, tickMs: 40, charsPerTick: 2 };
 
 async function setup(timing: MockTiming = FAST) {
   const gateway = new MockWorkspaceGateway(timing);
   const user = userEvent.setup();
-  render(<App gateway={gateway} />);
+  render(<App gateway={gateway} demo={gateway} />);
   await screen.findByRole('heading', { name: 'Thumbnail pentru joc' });
   await screen.findByText(/Am făcut două capturi/);
   return { gateway, user };
@@ -164,14 +164,16 @@ describe('Spațiul de lucru (date demonstrative)', () => {
     ).toBeInTheDocument();
   });
 
-  it('„Pregătește un plan” adaugă cardul planului, care așteaptă aprobarea proprietarului', async () => {
+  it('„Pregătește un plan” adaugă cardul planului și deschide ecranul Plan', async () => {
     const { user } = await setup();
     await user.click(screen.getByRole('button', { name: /De ce checkpointul e pe server/ }));
     await user.click(await screen.findByRole('button', { name: 'Pregătește un plan' }));
-    const card = await screen.findByRole('region', { name: 'Plan v3 · Cronometru pe server' });
+    const card = await screen.findByRole('region', { name: /Plan v1 · Obby de test/ });
     expect(within(card).getByText('Așteaptă aprobarea')).toBeInTheDocument();
-    expect(within(card).getByRole('button', { name: 'Deschide planul' })).toBeDisabled();
     expect(screen.queryByRole('button', { name: 'Pregătește un plan' })).not.toBeInTheDocument();
+    await user.click(within(card).getByRole('button', { name: 'Deschide planul' }));
+    expect(await screen.findByRole('heading', { name: /Plan v1: Obby de test/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Aprobă planul v1' })).toBeEnabled();
   });
 
   it('afișează scheletul la încărcarea lentă a istoricului', async () => {

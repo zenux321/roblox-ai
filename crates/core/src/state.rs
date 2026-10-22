@@ -6,7 +6,7 @@
 //! `waiting_dependency`, `waiting_approval`, `recovery_required`.
 //! Un task reușit nu se mai execută, nici după reconectarea UI.
 
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
 use crate::plan::{Plan, PlanStatus};
@@ -30,7 +30,7 @@ pub fn plan_transition_allowed(from: PlanStatus, to: PlanStatus) -> bool {
     )
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum RunStatus {
     Queued,
@@ -68,7 +68,7 @@ pub fn run_transition_allowed(from: RunStatus, to: RunStatus) -> bool {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case", tag = "state")]
 pub enum TaskState {
     Pending,
@@ -119,7 +119,7 @@ pub enum Resolution {
     EffectAbsent,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Run {
     pub plan_id: String,
     pub plan_sha256: String,
@@ -141,6 +141,11 @@ impl Run {
                 .map(|t| (t.id.clone(), t.depends_on.clone(), TaskState::Pending))
                 .collect(),
         }
+    }
+
+    /// Sarcinile în ordinea planului, cu starea lor.
+    pub fn tasks(&self) -> impl Iterator<Item = (&str, &TaskState)> {
+        self.tasks.iter().map(|(id, _, state)| (id.as_str(), state))
     }
 
     pub fn task_state(&self, id: &str) -> Option<&TaskState> {
@@ -174,11 +179,19 @@ impl Run {
             .all(|d| matches!(self.task_state(d), Some(TaskState::Succeeded { .. })))
     }
 
-    /// Sarcinile care pot porni acum, în ordinea planului.
+    /// Sarcinile care pot porni acum, în ordinea planului: cele noi și cele
+    /// eșuate sigur care mai au reîncercări.
     pub fn ready_tasks(&self) -> Vec<String> {
         self.tasks
             .iter()
-            .filter(|(_, deps, s)| *s == TaskState::Pending && self.dependencies_done(deps))
+            .filter(|(_, deps, s)| {
+                let startable = match s {
+                    TaskState::Pending => true,
+                    TaskState::Failed { attempts } => *attempts <= self.max_retries,
+                    _ => false,
+                };
+                startable && self.dependencies_done(deps)
+            })
             .map(|(id, _, _)| id.clone())
             .collect()
     }

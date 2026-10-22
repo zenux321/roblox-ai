@@ -129,3 +129,57 @@ test('stări: răspuns în curs, model lipsă, conversație goală', async ({ pa
   await page.getByRole('tab', { name: 'Agenți' }).click();
   await page.screenshot({ path: `${SHOTS}/panel-agents-1440x900.png` });
 });
+
+async function openNewPlan(page: Page) {
+  await page.getByRole('button', { name: /De ce checkpointul e pe server/ }).click();
+  await page.getByRole('button', { name: 'Pregătește un plan' }).click();
+  await page
+    .getByRole('region', { name: /Plan v1/ })
+    .getByRole('button', { name: 'Deschide planul' })
+    .click();
+  await expect(page.getByRole('heading', { name: /Plan v1: Obby de test/ })).toBeVisible();
+}
+
+for (const [width, height] of [
+  [1440, 900],
+  [1280, 720],
+] as [number, number][]) {
+  test(`plan → execuție → rezultate ${width}×${height}`, async ({ page }) => {
+    await open(page, width, height);
+    await openNewPlan(page);
+    await checkLayoutNoComposer(page, width);
+    await page.screenshot({ path: `${SHOTS}/plan-awaiting-${width}x${height}.png` });
+
+    await page.getByRole('button', { name: 'Aprobă planul v1' }).click();
+    await expect(page.getByText(/Aprobat de DEMO/)).toBeVisible();
+    await page.screenshot({ path: `${SHOTS}/plan-approved-${width}x${height}.png` });
+
+    await page.getByRole('button', { name: 'Pornește execuția' }).click();
+    await page.getByRole('tab', { name: 'Execuție' }).click();
+    await expect(page.getByText(/Scris src\/server\/Course/).first()).toBeVisible({ timeout: 10_000 });
+    await page.screenshot({ path: `${SHOTS}/execution-running-${width}x${height}.png` });
+
+    await expect(page.getByRole('button', { name: 'Vezi rezultatele' })).toBeVisible({ timeout: 20_000 });
+    await page.getByRole('button', { name: 'Vezi rezultatele' }).click();
+    await expect(page.getByText('Necesită verificare')).toBeVisible();
+    await checkLayoutNoComposer(page, width);
+    await page.screenshot({ path: `${SHOTS}/results-${width}x${height}.png` });
+  });
+}
+
+test('fereastra de recuperare după repornire 1440×900', async ({ page }) => {
+  await open(page, 1440, 900);
+  await openNewPlan(page);
+  await page.getByRole('button', { name: 'Aprobă planul v1' }).click();
+  await page.getByRole('button', { name: 'Pornește execuția' }).click();
+  await page.getByRole('button', { name: '← Conversație' }).click();
+  await page.getByRole('button', { name: 'Demo: stări' }).click();
+  await page.getByRole('menuitem', { name: 'Repornire în timpul rulării' }).click();
+  await expect(page.getByRole('dialog', { name: 'Am reluat de unde rămăsesem' })).toBeVisible();
+  await page.screenshot({ path: `${SHOTS}/recovery-1440x900.png` });
+});
+
+async function checkLayoutNoComposer(page: Page, width: number) {
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth);
+  expect(overflow).toBeLessThanOrEqual(width);
+}

@@ -238,9 +238,15 @@ fn retries_are_bounded() {
     let plan = exec_plan(ROOT); // max_retries_per_task = 2
     let mut run = Run::new(&plan);
     for attempt in 1..=3 {
+        assert_eq!(
+            run.ready_tasks(),
+            vec!["generate".to_string()],
+            "încercarea {attempt} e permisă"
+        );
         assert_eq!(run.start_task("generate"), Ok(attempt));
         run.fail_task("generate").unwrap();
     }
+    assert!(run.ready_tasks().is_empty());
     assert_eq!(run.status, RunStatus::Failed);
     assert!(run.start_task("generate").is_err());
 }

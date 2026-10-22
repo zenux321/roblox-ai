@@ -1,0 +1,22 @@
+[package]
+name = "rab-app"
+description = "Serviciul aplicației: conversații, planuri, aprobări, rulări demonstrative și rezultate"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+rab-core = { path = "../core" }
+rab-storage = { path = "../storage" }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+uuid.workspace = true
+time.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true

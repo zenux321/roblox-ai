@@ -14,6 +14,7 @@ tauri = { version = "=2.12.5", features = [] }
 serde.workspace = true
 serde_json.workspace = true
 rab-core = { path = "../../../crates/core" }
+rab-app = { path = "../../../crates/app" }
 
 [lints]
 workspace = true

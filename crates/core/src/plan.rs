@@ -40,6 +40,9 @@ pub struct Plan {
     pub project_id: String,
     pub project_root: String,
     pub base_snapshot_sha256: Option<String>,
+    /// Titlul afișat la aprobare; face parte din hash, deci din ce aprobi.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub title: Option<String>,
     pub objective: String,
     pub provider: ProviderId,
     pub model: String,
@@ -76,6 +79,13 @@ pub struct PlanScope {
 #[serde(deny_unknown_fields)]
 pub struct PlanTask {
     pub id: String,
+    /// Textele afișate în tabelul de pași; incluse în hash.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub title: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub agent: Option<crate::ids::AgentRole>,
     pub depends_on: Vec<String>,
     pub allowed_tools: Vec<ToolId>,
     pub deliverables: Vec<String>,

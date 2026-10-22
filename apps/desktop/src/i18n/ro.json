@@ -93,7 +93,6 @@
     "videoDemo": "Previzualizare demo · redarea video vine cu atașamentele reale",
     "preparePlan": "Pregătește un plan",
     "openPlan": "Deschide planul",
-    "openPlanLater": "Ecranul Plan vine în etapa M1.",
     "planAwaiting": "Așteaptă aprobarea",
     "canApprove": "Poate aproba: {who}",
     "associateText": "Conversație fără proiect. O poți asocia unui joc ca asistentul să-i folosească memoria.",
@@ -163,7 +162,10 @@
       "connected": "conectat",
       "not_configured": "neconfigurat",
       "demo": "demo"
-    }
+    },
+    "currentPlan": "Plan curent",
+    "openPlan": "Deschide planul",
+    "noPlan": "Niciun plan. Cere o schimbare în conversație."
   },
   "demo": {
     "menu": "Demo: stări",
@@ -171,6 +173,123 @@
     "loading": "Încărcare istoric (lentă)",
     "empty": "Conversație goală",
     "modelMissing": "Model lipsă",
-    "modelBack": "Model demo disponibil"
+    "modelBack": "Model demo disponibil",
+    "restart": "Repornire în timpul rulării"
+  },
+  "plan": {
+    "screenTitle": "Plan și sarcini",
+    "back": "← Conversație",
+    "tabs": {
+      "plan": "Plan",
+      "execution": "Execuție",
+      "results": "Rezultate"
+    },
+    "emptyTitle": "Niciun plan încă",
+    "emptyText": "Cere o schimbare în conversație și apasă „Pregătește un plan”. Nimic nu se modifică până nu aprobi planul.",
+    "backToChat": "Înapoi la conversație",
+    "title": "Plan v{version}: {title}",
+    "versions": "Versiuni",
+    "current": "v{version} · actuală",
+    "metricDuration": "Durată estimată",
+    "metricCost": "Cost estimat",
+    "metricLimit": "Limită de cost",
+    "metricRepairs": "Reparații automate",
+    "repairsValue": "max. {n} / pas",
+    "steps": "Pași",
+    "colNumber": "#",
+    "colWhat": "Ce face",
+    "colAgent": "Agent",
+    "colWhere": "Unde",
+    "colZone": "Fișier sau zonă",
+    "colAfter": "După",
+    "tests": "Teste obligatorii",
+    "testStatic": "automat",
+    "testStudio": "Studio · neexecutat în M1",
+    "testsNote": "„Finalizat” apare doar dacă trec toate. Testele neexecutate rămân marcate, iar rezultatul devine „Necesită verificare”.",
+    "permissions": "Permisiuni și date",
+    "approve": "Aprobă planul v{version}",
+    "requestChanges": "Cere modificări",
+    "approveNote": "Aprobarea e legată de această versiune și de amprenta ei. Orice schimbare creează o versiune nouă.",
+    "approvedBy": "Aprobat de {who} · {when}",
+    "fingerprint": "amprenta planului sha256 {short} · identitate neautentificată în M1 (legarea de contul Windows vine în M2)",
+    "revokedAt": "Aprobare revocată la {when}. Planul așteaptă o aprobare nouă.",
+    "revoke": "Revocă aprobarea",
+    "startRun": "Pornește execuția",
+    "statusLabels": {
+      "draft": "Ciornă",
+      "awaiting_approval": "Așteaptă aprobarea",
+      "approved": "Aprobat",
+      "superseded": "Înlocuit"
+    },
+    "error": "Acțiunea nu a reușit: {message}"
+  },
+  "run": {
+    "emptyTitle": "Execuția pornește după aprobare",
+    "emptyText": "Verifică planul și aprobă-l. Aici vei vedea fiecare pas, pe măsură ce se întâmplă.",
+    "openPlan": "Deschide planul",
+    "job": "Job curent · Plan v{version}",
+    "doneLabel": "Pași gata: {done} din {total}",
+    "startedAt": "Pornit la {time}",
+    "costSoFar": "Cost până acum: 0,00 $",
+    "pause": "Pauză",
+    "resume": "Continuă",
+    "stop": "Oprește",
+    "viewResults": "Vezi rezultatele",
+    "steps": "Pași",
+    "log": "Jurnal",
+    "attempt": "încercarea {n}",
+    "taskStates": {
+      "pending": "În așteptare",
+      "running": "Lucrează",
+      "succeeded": "Gata",
+      "failed": "Eșuat · se poate reîncerca",
+      "recovery_required": "Rezultat incert · cere verificare"
+    },
+    "statusLabels": {
+      "queued": "În coadă",
+      "running": "În execuție",
+      "paused": "În pauză",
+      "waiting_dependency": "Așteaptă dependențe",
+      "waiting_approval": "Așteaptă aprobare",
+      "recovery_required": "Recuperare necesară",
+      "succeeded": "Terminat",
+      "failed": "Eșuat",
+      "cancelled": "Oprit"
+    },
+    "backgroundNote": "În această etapă execuția rulează în fereastra aplicației. Continuarea după închiderea ferestrei vine odată cu worker-ul separat (M2).",
+    "recoveryTitle": "Recuperare după repornire",
+    "recoveryHeadline": "Am reluat de unde rămăsesem",
+    "recoveryText": "Aplicația s-a închis în timpul execuției. Pașii terminați sunt salvați. Pentru pasul întrerupt verificăm pe disc dacă efectul s-a produs, fără să-l repetăm orbește.",
+    "recoveryGo": "Verifică și continuă",
+    "recoveryLater": "Mai târziu"
+  },
+  "results": {
+    "emptyTitle": "Rezultatele apar după execuție",
+    "emptyText": "Aici vei vedea testele, fișierele modificate și raportul final.",
+    "viewExecution": "Vezi execuția",
+    "verdicts": {
+      "passed": ["Finalizat", "Toate testele au trecut."],
+      "needs_review": [
+        "Necesită verificare",
+        "Verificările automate au trecut, dar unele teste nu au fost executate."
+      ],
+      "failed": ["Eșuat", "Cel puțin un pas sau test a eșuat. Fișierele tale nu au fost suprascrise."],
+      "cancelled": ["Oprit", "Rularea a fost oprită. Efectele deja produse rămân; nu se repetă automat."]
+    },
+    "duration": "Durată",
+    "cost": "Cost măsurat",
+    "changes": "Modificări",
+    "changesValue": "{n} fișiere",
+    "tests": "Teste",
+    "limitations": "Limitări",
+    "noChanges": "Nicio modificare în această rulare.",
+    "newFile": "fișier nou",
+    "report": "Raport: {path}",
+    "openStudio": "Deschide în Studio",
+    "commit": "Commit local",
+    "pr": "Creează PR · GitHub neconectat",
+    "publish": "Publică în Roblox…",
+    "publishNote": "Pas separat, cere un plan și o aprobare noi",
+    "later": "Disponibil într-o etapă următoare (Studio în M4, Git în M2+)."
   }
 }

@@ -1,0 +1,20 @@
+[package]
+name = "rab-storage"
+description = "Stocare SQLite: migrații, conversații, planuri, aprobări, rulări, evenimente, buget și audit"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+rab-core = { path = "../core" }
+rusqlite.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true

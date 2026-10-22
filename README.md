@@ -12,7 +12,13 @@ Pachet inițial de specificații și configurare • 22 octombrie 2026 • versi
 
 Aplicație desktop pentru a transforma o idee de joc Roblox într-un proiect local verificabil: cercetare, plan aprobat, cod Luau, scene, testare și raport. Gândită pentru autor și câțiva prieteni, cu date locale, Obsidian și Ollama ca bază.
 
-**Starea livrării:** etapa 1 implementată: nucleul Rust (`crates/core`) cu validare strictă și policy engine, plus ecranul „Spațiu de lucru” în React/Tauri cu **date demonstrative** (`apps/desktop`). Vezi [raportul etapei 1](docs/reports/etapa-01.md). Nu există încă worker, persistență, integrări reale sau installer testat.
+**Starea livrării:** etapele 1 și M1 sunt implementate.
+- `crates/core`: validare strictă, policy engine, mașina de stări.
+- `crates/storage`: SQLite cu migrații.
+- `crates/app`: conversații persistente și fluxul plan → aprobare → execuție → rezultate pe un proiect demonstrativ local, cu furnizor fals.
+- `apps/desktop`: interfața React/Tauri.
+
+Rapoarte: [etapa 1](docs/reports/etapa-01.md), [M1](docs/reports/etapa-02-m1.md). Nu există încă worker separat, model real, Studio sau installer testat. Shellul Tauri nu a fost compilat încă pe Windows.
 
 **Starea inițială a pachetului (0.1):** documentație și exemple, nu aplicație funcțională și nu installer. Nu au fost instalate dependențe, consumate credite de generare, create repository-uri online sau modificate jocuri Roblox. Fișierele JSON sunt exemple pentru viitorul runtime propriu; nu sunt configurații Claude Code executabile.
 

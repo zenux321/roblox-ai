@@ -57,6 +57,13 @@
         "$ref": "#/$defs/PlanTask"
       }
     },
+    "title": {
+      "description": "Titlul afișat la aprobare; face parte din hash, deci din ce aprobi.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "version": {
       "type": "integer",
       "format": "uint32",
@@ -80,6 +87,16 @@
     "tasks"
   ],
   "$defs": {
+    "AgentRole": {
+      "type": "string",
+      "enum": [
+        "planner",
+        "researcher",
+        "builder",
+        "reviewer",
+        "memory_curator"
+      ]
+    },
     "PlanBudget": {
       "type": "object",
       "properties": {
@@ -167,6 +184,16 @@
             "type": "string"
           }
         },
+        "agent": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AgentRole"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "allowed_tools": {
           "type": "array",
           "items": {
@@ -185,8 +212,21 @@
             "type": "string"
           }
         },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "id": {
           "type": "string"
+        },
+        "title": {
+          "description": "Textele afișate în tabelul de pași; incluse în hash.",
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "additionalProperties": false,

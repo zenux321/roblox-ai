@@ -56,6 +56,14 @@ fn hash_ignores_status_but_not_content() {
     changed.objective.push_str(" și publică jocul");
     assert_ne!(base.sha256(), changed.sha256());
 
+    let mut retitled = base.clone();
+    retitled.title = Some("Alt titlu decât cel aprobat".into());
+    assert_ne!(
+        base.sha256(),
+        retitled.sha256(),
+        "textele afișate fac parte din aprobare"
+    );
+
     let mut more_paths = base.clone();
     more_paths.scope.write_paths.push("assets".into());
     assert_ne!(base.sha256(), more_paths.sha256());

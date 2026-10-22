@@ -5,13 +5,19 @@ import { createRoot } from 'react-dom/client';
 
 import { App } from './app/App';
 import { MockWorkspaceGateway } from './mock/mockGateway';
+import { inDesktopShell } from './platform/tauri';
+import { TauriWorkspaceGateway } from './platform/tauriGateway';
 
 const root = document.getElementById('root');
 if (root) {
-  // Etapa 1: numai date demonstrative. Gateway-ul real (worker) vine în M1/M2.
-  createRoot(root).render(
-    <StrictMode>
-      <App gateway={new MockWorkspaceGateway()} />
-    </StrictMode>,
+  // În aplicația desktop: serviciul Rust (SQLite). În browser: date demonstrative.
+  const app = inDesktopShell() ? (
+    <App gateway={new TauriWorkspaceGateway()} />
+  ) : (
+    (() => {
+      const mock = new MockWorkspaceGateway();
+      return <App gateway={mock} demo={mock} />;
+    })()
   );
+  createRoot(root).render(<StrictMode>{app}</StrictMode>);
 }

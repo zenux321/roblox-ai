@@ -32,6 +32,9 @@ pub struct Receipt {
     pub path: String,
     pub sha256: String,
     pub bytes: usize,
+    /// Conținutul anterior (text), pentru diff; `None` = fișier nou.
+    #[serde(skip)]
+    pub previous_content: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
@@ -108,7 +111,20 @@ impl<'a> FakeExecutor<'a> {
         task_id: &str,
         patch: &TextPatch,
     ) -> Result<Receipt, ExecError> {
-        let tool = ToolId::ProjectApplyValidatedPatch;
+        self.write_text(task_id, ToolId::ProjectApplyValidatedPatch, patch)
+    }
+
+    /// Scrie un raport (instrumentul `reports.write`), cu aceleași verificări.
+    pub fn write_report(&mut self, task_id: &str, patch: &TextPatch) -> Result<Receipt, ExecError> {
+        self.write_text(task_id, ToolId::ReportsWrite, patch)
+    }
+
+    fn write_text(
+        &mut self,
+        task_id: &str,
+        tool: ToolId,
+        patch: &TextPatch,
+    ) -> Result<Receipt, ExecError> {
         let request = ToolRequest {
             task_id,
             tool,
@@ -138,11 +154,12 @@ impl<'a> FakeExecutor<'a> {
             path: rel.as_string(),
         });
 
-        let current = match fs::read(&target) {
-            Ok(bytes) => Some(sha256_hex(&bytes)),
+        let previous = match fs::read(&target) {
+            Ok(bytes) => Some(bytes),
             Err(e) if e.kind() == std::io::ErrorKind::NotFound => None,
             Err(e) => return Err(e.into()),
         };
+        let current = previous.as_deref().map(sha256_hex);
         if current != patch.expected_base_sha256 {
             self.audit.push(AuditEvent::Conflict {
                 task_id: task_id.into(),
@@ -163,6 +180,7 @@ impl<'a> FakeExecutor<'a> {
             path: rel.as_string(),
             sha256,
             bytes: patch.new_content.len(),
+            previous_content: previous.map(|b| String::from_utf8_lossy(&b).into_owned()),
         })
     }
 

@@ -5,6 +5,7 @@ import type {
   ConversationScope,
   ConversationSummary,
   Message,
+  PlanView,
   StatusSnapshot,
   Visibility,
   WorkspaceGateway,
@@ -248,10 +249,12 @@ export function useWorkspace(gateway: WorkspaceGateway) {
     [gateway],
   );
 
+  /** Creează planul (versiune nouă) și îl anunță în conversație. */
   const preparePlan = useCallback(
-    async (conversationId: string) => {
-      const message = await gateway.preparePlan(conversationId);
+    async (conversationId: string): Promise<PlanView> => {
+      const { message, plan } = await gateway.preparePlan(conversationId);
       appendMessage(conversationId, message);
+      return plan;
     },
     [gateway, appendMessage],
   );
