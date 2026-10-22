@@ -8,7 +8,7 @@ Gazda alege proiectul, documentele comune și IP-ul/adaptorul VPN; afișează po
 
 Oprirea găzduirii închide listenerul și lease-urile; închiderea UI poate lăsa workerul pornit. Backup/restore gazdă și schimbarea dispozitivului se fac explicit, fără failover automat. Fiecare participant vede ce date sunt cache local și ce date nu s-au sincronizat.
 
-Blender este opțional. Înainte de instalarea unui MCP server/add-on, parcurge gate-ul din BLENDER_MCP.md. Exportul Claude Design trebuie adăugat sau referit înaintea implementării UI fidele; nu este inclus în pachetul inițial.
+Blender este opțional. Înainte de instalarea unui MCP server/add-on, parcurge gate-ul din BLENDER_MCP.md. Exportul Claude Design este acum inclus în design/claude-export. Folosește design/README.md și docs/DESIGN_HANDOFF.md pentru implementarea UI.
 
 ## Pentru dezvoltator acum
 

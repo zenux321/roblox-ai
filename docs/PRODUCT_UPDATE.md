@@ -4,7 +4,7 @@ Acest document înregistrează deciziile ulterioare pachetului inițial și este
 
 ## Decizii confirmate
 
-- Păstrează designul realizat de utilizator în Claude Design. Nu îl înlocui cu interfața din videoclip și nu refă onboarding-ul inutil. Exportul/designul final nu este încă în repository; înainte de implementarea fidelă a UI, cere linkul sau exportul. Nu pretinde că ai văzut designul.
+- Păstrează designul realizat de utilizator în Claude Design. Nu îl înlocui cu interfața din videoclip și nu refă onboarding-ul inutil. Exportul este acum în design/claude-export; v5 este baza. Citește design/README.md și docs/DESIGN_HANDOFF.md pentru versiuni, limitări și diferențe de comportament.
 - Joc nou și continuarea unui joc existent sunt ambele cerințe explicite. Proiectul existent poate avea deja un vault, poate exista doar în Studio sau poate avea surse locale Rojo.
 - La revenire intră în proiectul recent; afișează starea conexiunilor și reconcilierea dintre notițe și cod. Vaultul nu este sursă infailibilă a stării jocului.
 - Chat complet, conversații generale/per proiect, atașamente cu previzualizare și generare/editare thumbnails prin OpenAI Images API.

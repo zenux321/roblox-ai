@@ -1,5 +1,7 @@
 # Roblox AI Builder pentru Windows
 
+**Design primit:** [ghidul exportului](design/README.md) și [predarea către Claude Code](docs/DESIGN_HANDOFF.md). Versiunea v5 este referința principală; v2/v4 sunt păstrate pentru ecrane complementare. Acestea sunt prototipuri, nu aplicația funcțională.
+
 ## Actualizare 0.2 — cerințe noi aprobate ca direcție
 
 Citește întâi [cerințele consolidate](docs/PRODUCT_UPDATE.md), apoi [chat și asseturi](docs/CHAT_AND_ASSETS.md), [colaborarea prin VPN](docs/COLLABORATION.md) și [Blender MCP](docs/BLENDER_MCP.md). Acestea completează pachetul inițial: designul existent se păstrează; colaborarea este gazdă/participant prin Radmin/Hamachi, fără Supabase obligatoriu; workerii pot împărți sarcini independente. Nu sunt încă implementate.

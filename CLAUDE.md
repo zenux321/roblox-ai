@@ -1,8 +1,10 @@
 # Instrucțiuni pentru dezvoltare
 
+Designul utilizatorului este acum inclus: citește `design/README.md` și `docs/DESIGN_HANDOFF.md`; baza vizuală este `design/claude-export/Roblox AI Builder v5.dc.html`. Nu mai cere reîncărcarea exportului. Păstrează stilul verde-lime existent. Reimplementează în React/Tauri, fără a importa runtime-ul de demo cu privilegii native. Aplică reconcilierea costurilor, pairingului și stărilor înainte de implementare.
+
 ## Actualizare obligatorie 0.2
 
-Citește și docs/PRODUCT_UPDATE.md, docs/CHAT_AND_ASSETS.md, docs/COLLABORATION.md și docs/BLENDER_MCP.md. Acestea includ cerințele ulterioare confirmate și prevalează asupra restricțiilor de scope din pachetul 0.1. Păstrează designul Claude Design al utilizatorului; cere exportul/linkul dacă nu este în repository, fără să inventezi aspectul lui.
+Citește și docs/PRODUCT_UPDATE.md, docs/CHAT_AND_ASSETS.md, docs/COLLABORATION.md și docs/BLENDER_MCP.md. Acestea includ cerințele ulterioare confirmate și prevalează asupra restricțiilor de scope din pachetul 0.1. Păstrează designul livrat în design/claude-export și aplică docs/DESIGN_HANDOFF.md.
 
 Colaborarea aleasă este host/join prin Radmin VPN, Hamachi sau LAN, fără backend găzduit obligatoriu. VPN-ul nu implementează sincronizarea. Agenții colegului execută numai după consimțământ local; Ollama, IPC și MCP rămân locale. Nicio promisiune de VRAM combinat sau failover automat. Chatul, atașamentele, thumbnails și Blender opțional sunt cerințe țintă, nu funcții existente.
 

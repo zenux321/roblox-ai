@@ -1,8 +1,10 @@
 # Prompt actualizat pentru Claude Code
 
+Exportul Claude Design este acum în repository. Citește mai întâi design/README.md și docs/DESIGN_HANDOFF.md; folosește v5 ca referință principală, v2/v4 numai pentru ecrane complementare. Nu cere din nou ZIP-ul. Designul este referință de recreat în React/Tauri, nu runtime de producție.
+
 Continuă Roblox AI Builder din acest repository. Citește CLAUDE.md și docs/PRODUCT_UPDATE.md, CHAT_AND_ASSETS.md, COLLABORATION.md, BLENDER_MCP.md, apoi PRD, ARCHITECTURE, ROADMAP, SECURITY_TEST_PLAN și COSTS_AND_AUTH.
 
-Păstrează designul Claude Design ales de mine. Dacă linkul/exportul nu este disponibil, cere-l înainte de implementarea vizuală fidelă; poți pregăti între timp contractele și core-ul independente de design. Nu înlocui UI cu una dedusă din videoclip.
+Păstrează designul Claude Design ales de mine și livrat în design/claude-export. Nu înlocui UI cu una dedusă din videoclip.
 
 Scopul complet include joc nou/existent și vault, chat complet privat/comun cu atașamente, thumbnails OpenAI opționale, host/join prin Radmin/Hamachi/LAN, workeri pe două PC-uri și Blender MCP opțional. Nu folosi Supabase obligatoriu și nu expune Ollama/Studio/Blender MCP în VPN. VPN-ul nu implementează sincronizarea aplicației.
 

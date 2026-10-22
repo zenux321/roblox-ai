@@ -6,7 +6,7 @@ Cerințele din PRODUCT_UPDATE.md provin din deciziile explicite ale utilizatorul
 
 Referințe oficiale consultate în conversație: [Radmin VPN](https://www.radmin-vpn.com/) pentru rețea virtuală și [Hamachi](https://vpn.net/) pentru conectivitate și oferta gratuită curentă. Revalidează condițiile și versiunile la setup. Supabase a fost evaluat, dar nu este alegerea pentru modul curent.
 
-Nu s-a verificat sau selectat încă un server MCP Blender. Nu s-a primit exportul designului final. Acestea sunt dependențe concrete pentru etapele B1 și UI fidelă, nu motive să inventăm capabilități sau ecrane.
+Nu s-a verificat sau selectat încă un server MCP Blender. Exportul designului este acum în design/claude-export; vezi docs/DESIGN_HANDOFF.md. Acestea sunt dependențe concrete pentru etapele B1 și UI fidelă, nu motive să inventăm capabilități sau ecrane.
 
 Accesate la 22 octombrie 2026. Sunt surse de verificare a produselor externe; arhitectura și pragurile propuse sunt decizii proprii ale proiectului, nu promisiuni ale furnizorilor. Revalidează înainte de cod și release.
 
